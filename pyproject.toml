@@ -6,32 +6,28 @@ build-backend = "hatchling.build"
 name = "aoc"
 description = 'AdventofCode cli helper'
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.11"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "U.N. Owen", email = "void@some.where" },
+  { name = "Heath Brown", email = "heathd.brown@gmail.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
   "click",
+  "python-dotenv",
+  "requests",
 ]
 dynamic = ["version"]
 
 [project.urls]
-Documentation = "https://github.com/unknown/aoc#readme"
-Issues = "https://github.com/unknown/aoc/issues"
-Source = "https://github.com/unknown/aoc"
+Documentation = "https://github.com/heathdbrown/aoc#readme"
+Issues = "https://github.com/heathdbrown/aoc/issues"
+Source = "https://github.com/heathdbrown/aoc"
 
 [project.scripts]
 aoc = "aoc.cli:aoc"
@@ -45,7 +41,8 @@ dependencies = [
   "pytest-cov",
   "pylint",
   "black",
-  "mypy"
+  "mypy",
+  "more-itertools"
 ]
 [tool.hatch.envs.default.scripts]
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=aoc --cov=tests {args}"
