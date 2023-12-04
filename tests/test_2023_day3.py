@@ -17,9 +17,13 @@ def test_parse_pos():
 def test_parse_line():
     text = "467..114.."
 
-    assert parse_line(text, 0) == {
-        "467": Number(name="467", position=(0, 3), linenum=0),
-        "114": Number(name="114", position=(5, 8), linenum=0),
+    assert parse_line(text, 0, line_count=1) == {
+        "467": Number(
+            name="467", position=(0, 3), linenum=0, line_count=1, line_length=10
+        ),
+        "114": Number(
+            name="114", position=(5, 8), linenum=0, line_count=1, line_length=10
+        ),
     }
 
 
