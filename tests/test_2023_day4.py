@@ -22,8 +22,16 @@ TEST_DATA = [
 ]
 
 
-def points():
-    pass
+def winners():
+    text = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53"
+    card = parse_card(text)
+    assert card.winners() == [48, 83, 86, 17]
+
+
+@pytest.mark.parametrize("text, expected", TEST_DATA)
+def points(text, expected):
+    card = parse_card(text)
+    assert card.points() == expected
 
 
 def test_parse_scratched_numbers():
