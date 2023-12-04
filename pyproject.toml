@@ -21,6 +21,7 @@ dependencies = [
   "click",
   "python-dotenv",
   "requests",
+  "parse",
 ]
 dynamic = ["version"]
 
