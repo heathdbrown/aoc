@@ -8,6 +8,7 @@ from aoc.year2023.day4 import parse_scratched_numbers
 from aoc.year2023.day4 import parse_line
 from aoc.year2023.day4 import parse_file
 from aoc.year2023.day4 import solve_part_1
+from aoc.year2023.day4 import solve_part_2
 
 TEST_DATA_DIR = Path(Path(__file__).resolve().parent / "data")
 
@@ -22,7 +23,13 @@ TEST_DATA = [
 ]
 
 
-def winners():
+def test_scratch_cards():
+    text = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53"
+    card = parse_card(text)
+    assert card.scratch_cards() == 4
+
+
+def test_winners():
     text = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53"
     card = parse_card(text)
     assert card.winners() == [48, 83, 86, 17]
@@ -58,5 +65,9 @@ def test_parse_line(text, expected):
     assert parse_line(text).points() == expected
 
 
-def test_solve():
+def test_solve_part_1():
     assert solve_part_1(f"{TEST_DATA_DIR}/input_2023_day4.txt") == 13
+
+
+def test_solve_part_2():
+    assert solve_part_2(f"{TEST_DATA_DIR}/input_2023_day4.txt") == 30
