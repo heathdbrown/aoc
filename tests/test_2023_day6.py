@@ -63,3 +63,7 @@ def test_parse_file(input_file):
 
 def test_solve_part_1():
     assert solve_part_1(f"{TEST_DATA_DIR}/input_2023_day6.txt") == 288
+
+
+def test_solve_part_2():
+    assert solve_part_2(f"{TEST_DATA_DIR}/input_2023_day6.txt") == 71503

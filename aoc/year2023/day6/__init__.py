@@ -21,16 +21,19 @@ def ways_to_beat_record(time: int, record: int) -> int:
     distance = 0
     hold_time = 0
 
-    ways = []
+    # minimal ways
     for i in range(1, record + 1):
         # do racing
         travel_time = time - hold_time
         distance = travel_time * hold_time
         if distance > record:
-            ways.append(hold_time)
+            min_time = hold_time
+            break
         hold_time += 1
 
-    return len(ways)
+    max_hold_time = time - min_time
+
+    return len(list(range(min_time, max_hold_time + 1)))
 
 
 def parse_record(text: str) -> list[int]:
@@ -66,8 +69,7 @@ def parse_time_2(text: str) -> int:
 
 def parse_line_2(text: str) -> int:
     time = parse_time_2(text)
-    record = parse_time_2(text)
-
+    record = parse_record_2(text)
     ways = ways_to_beat_record(time, record)
 
     return ways
@@ -100,5 +102,5 @@ def solve_part_2(file):
 
 
 if __name__ == "__main__":
-    print(solve_part_1("./data/input_2023_day6.txt"))
-    print(solve_part_2("./data/input_2023_day6.txt"))
+    print("Part1: ", solve_part_1("./data/input_2023_day6.txt"))
+    print("Part2: ", solve_part_2("./data/input_2023_day6.txt"))
