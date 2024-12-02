@@ -1,57 +1,42 @@
 from collections import defaultdict
+from collections import Counter
 
 
 def read_file(filename: str) -> list[str]:
     with open(filename, "r") as f:
-        data = f.read().split("\n")
+        data = f.readlines()
     return data
 
 
 def part1():
     data = read_file("./data/input_2024_day1.txt")
     # data = read_file("./tests/data/input_2024_day1.txt")
-    distances = []
-    list1 = []
-    list2 = []
-    for l in data:
-        if len(l) == 0:
-            break
-        list1.append(int(l.split()[0]))
-        list2.append(int(l.split()[1]))
 
-    list1.sort()
-    list2.sort()
-
-    pairs = []
-    for i in range(len(list1)):
-        pairs.append((list1.pop(), list2.pop()))
-
-    for p in pairs:
-        distances.append(abs(p[0] - p[1]))
-
-    print(sum(distances))
+    a, b = [], []
+    for line in data:
+        x, y = (int(z) for z in line.split())
+        a.append(x)
+        b.append(y)
+    a.sort()
+    b.sort()
+    n = len(a)
+    print(sum(abs(a[i] - b[i]) for i in range(n)))
 
 
 def part2():
     data = read_file("./data/input_2024_day1.txt")
     # data = read_file("./tests/data/input_2024_day1.txt")
 
-    similarity = defaultdict(int)
-    list1 = []
-    list2 = []
-    for l in data:
-        if len(l) == 0:
-            break
-        list1.append(int(l.split()[0]))
-        list2.append(int(l.split()[1]))
+    a, b = [], []
+    for line in data:
+        x, y = (int(z) for z in line.split())
+        a.append(x)
+        b.append(y)
 
-    for i in list1:
-        if i not in similarity:
-            similarity[i] = i * list2.count(i)
-        else:
-            similarity[i] += i * list2.count(i)
+    n = len(a)
+    c = Counter(b)
 
-    print(sum(similarity.values()))
+    print(sum(a[i] * c[a[i]] for i in range(n)))
 
 
 if __name__ == "__main__":
