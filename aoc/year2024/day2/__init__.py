@@ -65,8 +65,53 @@ def part1():
             safe += 1
         if answer[k + 1] is False:
             unsafe += 1
-    print(f"Safe: {safe}")
+    return safe
+
+
+def part2():
+    data = read_file("./tests/data/input_2024_day2.txt")
+
+    # data = read_file("./data/input_2024_day2.txt")
+
+    data = [[int(l) for l in i.strip().split()] for i in data]
+    answer = {}
+    safe = 0
+    unsafe = 0
+    for k, report in enumerate(data):
+        n = len(report)
+        r = {}
+        diffs = []
+        diffs_check = []
+        if increasing_trend(report) or decreasing_trend(report):
+            r["trend"] = True
+        else:
+            r["trend"] = False
+        for i in range(n):
+            if i + 1 < n:
+                diff = abs(report[i] - report[i + 1])
+                diffs.append(diff)
+                if diff == 0:
+                    diffs_check.append(False)
+                elif diff > 3:
+                    diffs_check.append(False)
+                else:
+                    diffs_check.append(True)
+        # r["diffs"] = diffs
+
+        r["diffs_check"] = all(diffs_check)
+        c = collections.Counter(diffs_check)
+        if c[False] == 1:
+            r["single_value"] = True
+        else:
+            r["single_value"] = False
+        answer[k + 1] = r
+        if answer[k + 1]["trend"] is True and answer[k + 1]["diffs_check"] is True:
+            safe += 1
+        if answer[k + 1]["trend"] is False and answer[k + 1]["single_value"] is True:
+            safe += 1
+    return answer, safe
 
 
 if __name__ == "__main__":
-    part1()
+    print(f"Part1: {part1()}")
+    print(f"Part2: {part2()}")
