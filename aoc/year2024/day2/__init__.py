@@ -1,3 +1,4 @@
+# https://www.youtube.com/watch?v=bb8m_i6O6to
 reports = []
 with open("./data/input_2024_day2.txt") as f:
     for line in f.readlines():
@@ -11,6 +12,15 @@ def is_safe(l):
     )
 
 
+# part 1
 safe_count = sum(map(is_safe, reports))
 
 print(safe_count)
+
+# part 2
+safe_count2 = 0
+for report in reports:
+    safe_count2 += is_safe(report) or any(
+        is_safe(report[:i] + report[i + 1 :]) for i in range(len(report))
+    )
+print(safe_count2)
